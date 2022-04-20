@@ -1,4 +1,28 @@
 body {
-  background-color: darkblue;
+  background-color: rgba(124, 203, 248, 0.288);
   color: wheat;
+  text-align: center;
+}
+.cardContainer {
+  display: flex;
+  flex-flow: wrap;
+  gap: 20px 150px;
+  justify-content: center;
+}
+
+.card {
+
+}
+.card-body {
+  background-color: rgb(1, 1, 82);
+
+}
+
+
+.card-text {
+  font-weight: bold;
+  font-size: larger;
+}
+.card-footer {
+
 }
