@@ -228,9 +228,9 @@ console.log(pets);
       <img src="${member.imageUrl}" class="card-img-top" alt="...">
       <p class="color">${member.color}</p>
       <p class=skl>${member.specialSkill}</p>
-      <div class="card-footer text-muted mx-auto">
-      <button type="button" class="typebutton">${member.type}</button>
-   </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">${member.type}</button>
+      </div>
     </div>
   </div>`;
   }
