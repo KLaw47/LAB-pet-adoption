@@ -210,3 +210,28 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
+const app = document.querySelector("#app");
+
+
+pets.forEach((item, index)=>{
+  item.id = index+1;
+});
+
+console.log(pets);
+
+  let domString = "";
+  for (const member of pets) {
+  
+    domString += `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <p class="card-text">${member.name}</p>
+      <img src="${member.imageUrl}" class="card-img-top" alt="...">
+      <p class="color">${member.color}</p>
+      <p class=skl>${member.specialSkill}</p>
+      <div class="card-footer text-muted mx-auto">
+      <button type="button" class="typebutton">${member.type}</button>
+   </div>
+    </div>
+  </div>`;
+  }
+  app.innerHTML = domString;
