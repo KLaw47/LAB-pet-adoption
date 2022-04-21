@@ -210,7 +210,6 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
-const app = document.querySelector("#app");
 
 
 pets.forEach((item, index)=>{
@@ -219,8 +218,14 @@ pets.forEach((item, index)=>{
 
 console.log(pets);
 
+const renderToDom = (divId, textToRender) => {
+  const selectedDiv = document.querySelector(divId);
+  selectedDiv.innerHTML = textToRender;
+};
+
+const renderCards = (array) => {
   let domString = "";
-  for (const member of pets) {
+  for (const member of array) {
   
     domString += `<div class="card" style="width: 18rem;">
     <div class="card-body">
@@ -234,4 +239,43 @@ console.log(pets);
     </div>
   </div>`;
   }
-  app.innerHTML = domString;
+  renderToDom("#app", domString);
+};
+ 
+renderCards(pets);
+
+const filter = (array, type) => {
+  const typeArray = [];
+
+  array.forEach((item) => {
+    if (item.type === type) {
+      typeArray.push(item);
+    }
+  });
+
+  return typeArray;
+}
+console.log(filter(pets, "cat"));
+
+const app = document.querySelector("#app");
+const catsFilter = document.querySelector("#catsFilter");
+const dogsFilter = document.querySelector("#dogsFilter");
+const dinosFilter = document.querySelector("#dinosFilter");
+
+const filterType = (event) => {
+  console.log(event);
+  if (event.target.id === "catsFilter") {
+    renderCards(filter(pets, "cat"))
+  }else if (event.target.id === "dogsFilter") {
+    renderCards(filter(pets,"dog"))
+  }else if (event.target.id === "dinosFilter") {
+    renderCards(filter(pets, "dino"))
+  }else if (event.target.id === "all") {
+    renderCards(pets)
+  }
+
+}
+all.addEventListener('click', filterType)
+catsFilter.addEventListener('click', filterType)
+dogsFilter.addEventListener('click', filterType)
+dinosFilter.addEventListener('click', filterType)

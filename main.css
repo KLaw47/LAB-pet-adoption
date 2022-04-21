@@ -3,6 +3,10 @@ body {
   color: wheat;
   text-align: center;
 }
+.filterButtons {
+  display: flex;
+  justify-content: space-around;
+}
 .cardContainer {
   display: flex;
   flex-flow: wrap;
