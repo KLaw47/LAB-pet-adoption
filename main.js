@@ -216,25 +216,37 @@ pets.forEach((item, index)=>{
   item.id = index+1;
 });
 
-console.log(pets);
+//console.log(pets);
 
 const renderToDom = (divId, textToRender) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = textToRender;
 };
 
+const filterBtns  = () => {
+  let domString =`
+  <button class="btn btn-secondary btn-lg buttonRow" id="all">All pets</button>
+  <button class="btn btn-secondary btn-lg buttonRow" id="cat">Cats</button>
+  <button class="btn btn-secondary btn-lg buttonRow" id="dog">Dogs</button>
+  <button class="btn btn-secondary btn-lg buttonRow" id="dino">Dinos</button>
+`;
+renderToDom("#filterContainer", domString)
+};
+
+
 const renderCards = (array) => {
-  let domString = "";
+  let domString ='';
   for (const member of array) {
   
-    domString += `<div class="card" style="width: 18rem;">
+    domString += `
+    <div class="card" style="width: 18rem;">
     <div class="card-body">
       <p class="card-text">${member.name}</p>
       <img src="${member.imageUrl}" class="card-img-top" alt="...">
       <p class="color">${member.color}</p>
       <p class=skl>${member.specialSkill}</p>
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">${member.type}</button>
+        <p>${member.type}</p>
       </div>
     </div>
   </div>`;
@@ -242,40 +254,23 @@ const renderCards = (array) => {
   renderToDom("#app", domString);
 };
  
-renderCards(pets);
+const eventListeners = () => {
+  document.querySelector('#filterContainer').addEventListener('click', (e) =>{
+    if (e.target.id === "all") {
+      renderCards(pets);
+    }else if (e.target.id) {
+      const types = pets.filter(el =>el.type === e.target.id);
+     
+      renderCards(types);
 
-const filter = (array, type) => {
-  const typeArray = [];
-
-  array.forEach((item) => {
-    if (item.type === type) {
-      typeArray.push(item);
     }
   });
 
-  return typeArray;
+  //form
 }
-console.log(filter(pets, "cat"));
-
-const app = document.querySelector("#app");
-const catsFilter = document.querySelector("#catsFilter");
-const dogsFilter = document.querySelector("#dogsFilter");
-const dinosFilter = document.querySelector("#dinosFilter");
-
-const filterType = (event) => {
-  console.log(event);
-  if (event.target.id === "catsFilter") {
-    renderCards(filter(pets, "cat"))
-  }else if (event.target.id === "dogsFilter") {
-    renderCards(filter(pets,"dog"))
-  }else if (event.target.id === "dinosFilter") {
-    renderCards(filter(pets, "dino"))
-  }else if (event.target.id === "all") {
-    renderCards(pets)
-  }
-
-}
-all.addEventListener('click', filterType)
-catsFilter.addEventListener('click', filterType)
-dogsFilter.addEventListener('click', filterType)
-dinosFilter.addEventListener('click', filterType)
+const startApp = () => {
+  filterBtns()
+  renderCards(pets)
+  eventListeners()
+};
+startApp()
