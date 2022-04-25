@@ -7,6 +7,7 @@ text-align: center;
 .filterbutton {
   display: flex;
   justify-content: space-around;
+  margin: 20px 20px
 }
 .cardContainer {
   display: flex;
@@ -22,7 +23,9 @@ text-align: center;
   background-color: rgb(1, 1, 82);
 
 }
+.btn-danger {
 
+}
 
 .card-text {
   font-weight: bold;

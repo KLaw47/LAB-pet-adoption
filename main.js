@@ -223,6 +223,65 @@ const renderToDom = (divId, textToRender) => {
   selectedDiv.innerHTML = textToRender;
 };
 
+const petModal = () => {
+  const domString = 
+  `
+  <!-- Button trigger modal -->
+    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#add-video">
+    Add Pet
+    </button>
+     <!-- Modal -->
+  <div class="modal fade" id="add-video" tabindex="-1" aria-labelledby="add-video" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-md-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Pet</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-body">
+        <form>
+        <div class="form-floating mb-3">
+          <input class="form-control form-control-lg" type="text" placeholder="Name" id="name" aria-label="name" required>
+          <label for="name">Name</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+          <input class="form-control form-control-lg" type="text" placeholder="Color" id="color" aria-label="color" required>
+          <label for="title">Color</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+        <input class="form-control form-control-lg" type="text" placeholder="Special Skill" id="specialSkill" aria-label="specialSkill" required>
+        <label for="title">Special Skill</label>
+      </div>
+        
+      <div class="form-floating mb-3">
+      <input class="form-control form-control-lg" type="text" placeholder="Type of Pet" id="type" aria-label="type" required>
+      <label for="title">Type</label>
+    </div>
+      
+    <div class="form-floating mb-3">
+    <input class="form-control form-control-lg" type="text" placeholder="Image URL" id="imageUrl" aria-label="imageUrl" required>
+    <label for="title">Image URL</label>
+  </div>
+    
+        <button 
+          type="submit" 
+          class="btn btn-success" 
+        >
+          Submit
+        </button>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+renderToDom("#formContainer", domString);
+};
+
+
+
 const filterBtns  = () => {
   let domString =`
   <button class="btn btn-secondary btn-lg buttonRow" id="all">All pets</button>
@@ -241,6 +300,9 @@ const renderCards = (array) => {
     domString += `
     <div class="card" style="width: 18rem;">
     <div class="card-body">
+    <div>
+      <button class="btn btn-danger" id="delete--${member.name}">X</button>
+    </div>
       <p class="card-text">${member.name}</p>
       <img src="${member.imageUrl}" class="card-img-top" alt="...">
       <p class="color">${member.color}</p>
@@ -265,10 +327,39 @@ const eventListeners = () => {
 
     }
   });
-
+//delete
+document.querySelector('#app').addEventListener('click', (e) => {
+  if (e.target.id) {
+    const [method, name] = e.target.id.split("--");
+    const index = pets.findIndex(pet => pet.name === name)
+    if (e.target.id.includes('delete')) {
+      pets.splice(index, 1)
+      renderCards(pets);
+    }
+  }
+});
   //form
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); 
+    const subObj =    {
+      name: document.querySelector("#name").value,
+      color: document.querySelector("#color").value,
+      specialSkill: document.querySelector("#specialSkill").value,
+      type: document.querySelector("#type").value,
+      imageUrl: document.querySelector("#imageUrl").value,
+    }
+   
+    pets.push(subObj);
+   
+    renderCards(pets)
+
+    formModal.hide()
+    form.reset();
+  });
 }
 const startApp = () => {
+  petModal()
   filterBtns()
   renderCards(pets)
   eventListeners()
