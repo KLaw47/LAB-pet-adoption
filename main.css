@@ -1,8 +1,6 @@
 body {
   background-color: rgba(124, 203, 248, 0.288);
 color: bisque;
-
-
 }
 .filterbutton {
   display: flex;
@@ -15,6 +13,7 @@ color: bisque;
   gap: 20px 150px;
   justify-content: center;
 }
+
 #cat {
   background-color: rgb(0, 100, 67);
 }
@@ -48,3 +47,9 @@ color: bisque;
   font-size: larger;
   text-align: center;
 }
+.form {
+  display: flex;
+  justify-content: center;
+  margin: 20px 20px
+}
+
