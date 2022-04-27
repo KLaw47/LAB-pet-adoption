@@ -52,4 +52,9 @@ color: bisque;
   justify-content: center;
   margin: 20px 20px
 }
-
+h5 {
+  color: black;
+}
+.modal-body {
+  color:black;
+}
